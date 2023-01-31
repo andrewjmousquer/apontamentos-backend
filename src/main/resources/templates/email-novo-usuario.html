@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="margin: 0; padding: 0;">
+	<div style="text-align: center; padding: 40px;">
+		<img style="max-width: 250px; max-height: 100px;"
+			th:src="${logo}" />
+	</div>
+	<div style="background: #F2F2F2; padding: 20px;">
+		<div
+			th:style="'color: #717171;border-radius: 10px; padding: 10px;background: #fff;'">
+			<p>
+				Olá <strong><span th:text="${nomeUsuario}"></span></strong>,
+			</p>
+			<h2 style="text-align: left;">
+				Agradecemos por fazer o registro em nossos sistema!
+			</h2>
+			
+			<p align="left">
+				<span>Cordialmente,<br/>Equipe CARBON APONTAMENTOS</span>
+			</p>
+			<div style="text-align: left;">
+				<p style="color: #717171;">
+					<strong>Observação: Não responda a este e-mail. Ele foi enviado de um endereço 
+					exclusivo para envio de notificações, que não aceita o recebimento de mensagens.</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

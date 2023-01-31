@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+	th:href="@{src\main\resources\templates\main.css}"
+	rel="stylesheet" />
+</head>
+
+<header class="items-center justify-center h-header">
+	<div class="text-center" style="border-top: 1px solid">
+		<table class="table-fixed w-full text-right rounded">
+			<thead class="bg-gray-100 right">
+				<tr>
+					<th colspan="2" rowspan="2" class="text-left pl-4"><img
+						th:src="${logo}" class="card-img-top" alt="..."></th>
+					<th class="text-center" colspan="8" th:text="${checklistName}"></th>
+				</tr>
+				<tr>
+					<th class="text-right" colspan="4"><small>Data da
+							entrada do veículo</small></th>
+					<th colspan="2"><small>Data do checklist</small></th>
+					<th colspan="2"><small>Finalizado por</small></th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr>
+					<td colspan="3"></td>
+					<td colspan="3" th:text="${entryDate}" style="font-size: .775rem;"></td>
+					<td colspan="2" th:text="${checklistDate}"
+						style="font-size: .775rem;"></td>
+					<td colspan="2" class="text-center"
+						th:text="${checklistAnsweredName}" style="font-size: .775rem;"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</header>
+<body class="items-center justify-center h-body">
+	<div class="shadow-lg">
+		<table class="table-fixed w-full border text-right rounded"
+			style="border-left: 0px; border-right: 0px; border-top: 1px solid">
+			<thead class="bg-gray-100">
+				<tr>
+					<th class="pl-4 bg-gray-100"><small>N° OS:</small></th>
+					<th class="font-normal" style="font-size: .775rem;"
+						th:text="${osNumber}"></th>
+					<th class="bg-gray-100 "><small>Fabricante:</small></th>
+					<th class="pr-4 font-normal" style="font-size: .775rem;"
+						th:text="${brand}"></th>
+					<th class="pr-4 bg-gray-100"><small>Ano Fab./Mod.</small></th>
+					<th class="pr-4 font-normal" style="font-size: .775rem;">-</th>
+				</tr>
+			</thead>
+		</table>
+		<table class="table-fixed w-full border text-right rounded"
+			style="border-left: 0px; border-right: 0px; border-top: 0px;">
+			<thead class="bg-gray-100">
+				<tr>
+					<th class="pl-4 bg-gray-100"><small>Nr. Chassi:</small></th>
+					<th class="pr-4 font-normal" style="font-size: .775rem;"
+						th:text="${chassi}"></th>
+					<th class="bg-gray-100"><small>Modelo:</small></th>
+					<th class="pr-4 font-normal" style="font-size: .775rem;"
+						th:text="${model}"></th>
+					<th class="pr-4 bg-gray-100"><small>Nr. Placa:</small></th>
+					<th class="pr-4 font-normal" style="font-size: .775rem;"
+						th:text="${plate}"></th>
+				</tr>
+			</thead>
+		</table>
+		<table class="table-fixed w-full border rounded"
+			style="border-left: 0px; border-right: 0px; border-top: 0px;">
+			<thead class="bg-gray-100">
+				<tr>
+					<th class="bg-gray-100 text-right"><small>Data da </br>Assinatura:
+					</small></th>
+					<th class="pr-6 font-normal"></th>
+					<th class="bg-gray-100 text-right"><small>Assinatura </br>do
+							Cliente:
+					</small></th>
+					<th class="pr-6 font-normal"></th>
+				</tr>
+			</thead>
+		</table>
+		<div th:each="group : ${checklistResponseDTO.checklist.groups}"
+			style="border-top: 1px solid">
+			<h2 class="font-medium  bg-gray-200 p-2 rounded text-center"
+				th:text="${group.name}"></h2>
+			<table class="table-fixed w-full border text-left rounded">
+				<thead class="bg-gray-100">
+					<tr>
+						<th class="pl-4 bg-gray-100"
+							style="border-right: 1px solid #dddddd; white-space: normal">CATEGORIA
+							- ITEM</th>
+						<th class="bg-gray-100">OBSERVAÇÕES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="border: 1px solid #dddddd;"
+						th:each="answer : ${checklistResponseDTO.answers}"
+						th:if="${answer.question.groupID == group.id && answer.question.question != null}">
+						<td
+							style="border: 1px solid #dddddd; white-space: normal; font-size: .775rem;"
+							th:text="${answer.question.question}"></td>
+						<td
+							style="border: 1px solid #dddddd; white-space: normal; font-size: .775rem;"
+							th:text="${answer.comment != null ? answer.comment : answer.answer.value}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:each="group : ${checklistResponseDTO.checklist.groups}">
+		<h2 class="font-medium  bg-gray-200 p-2 rounded text-center"
+				th:text="${group.name}"></h2>
+			<table class="table-fixed w-full border text-right rounded">
+				<tbody>
+					<tr th:each="answer : ${checklistResponseDTO.answers}"
+						th:if="${answer.question.groupID == group.id && answer.photos != null && !answer.photos.isEmpty()}">
+						<td class="text-center" colspan="1"
+							style="font-size: .775rem; border-right: 1px solid #dddddd; writing-mode: tb-rl; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -o-transform: rotate(90deg); -ms-transform: rotate(90deg); transform: rotate(90deg); white-space: nowrap; bottom: 0;"
+							th:text="${answer.question.question}"></td>
+						<td colspan="9">
+							<div th:each="photo : ${answer.photos}">
+								<img th:src="${photo.url}" class="card-img-top" alt="...">
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

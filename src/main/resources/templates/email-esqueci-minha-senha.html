@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="margin: 0; padding: 0;">
+	<div style="text-align: center; padding: 40px;">
+		<img style="max-width: 250px; max-height: 100px;"
+			th:src="${logo}" />
+	</div>
+	<div style="background: #F2F2F2; padding: 20px;">
+		<div style="color: #717171;border-radius: 10px; padding: 10px;background: #fff;">
+			<p style="color: #717171;">
+				Olá <strong><span style="color: #717171;" th:text="${nomeUsuario}"></span></strong>,
+			</p>
+			<h2 style="text-align: left;color: #717171;">
+				Você solicitou uma nova senha no sistema CARBON APONTAMENTOS - Consulting
+			</h2>
+
+			<p align="left" style="color: #717171;">
+				<b>Para criá-la clique no botão abaixo.</b>
+			</p>
+			<p align="center" style="padding-top: 30px; padding-bottom: 40px;">
+				<a th:href="${link}"><button
+						th:style="'background-color: #2596be;border-radius: 5px; color: #ffffff; width: 200px; height: 45px; font-size: 18px; border: none;'"
+						type="button">
+						<b>Trocar a minha senha</b>
+					</button></a>
+			</p>
+			<p align="left" style="color: #717171;">
+				<b>Se o botão acima não funcionar copie e cole o link abaixo na
+					barra de endereço do seu navegador:</b>
+			</p>
+			<p align="left">
+				<span th:text="${link}"></span>
+			</p>
+			<div style="text-align: left;">
+				<p style="color: #717171;">
+					<strong>Observação: Não responda a este e-mail. Ele foi enviado de um endereço 
+					exclusivo para envio de notificações, que não aceita o recebimento de mensagens.</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

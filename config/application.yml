@@ -1,0 +1,69 @@
+logging:
+  file: 
+    name: logs/application.log
+  level:
+    ROOT: INFO
+    com.portal: TRACE
+    org.springframework.web: DEBUG
+#security.require-ssl: true
+server:
+  port: 8443
+  #ssl:
+    #key-store: /etc/letsencrypt/live/carbon-apontamento.sbmtech.com.br/keystore.p12
+    #key-store-password: s2b0m*TECH
+    #key-store-type: PKCS12
+    #key-alias: apache2
+spring:
+  banner:
+    location: banner.txt
+  datasource-portal:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3306/carbon_worklog?rewriteBatchedStatements=true&useSSL=false&autoReconnect=true&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    defaultSchema: carbon_worklog.
+    username: portal
+    password: s2b0m*TECH
+    maxPoolSize: 50
+    minPoolSize: 10
+    maxStatements: 5000
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    testConnectionOnCheckout: false
+    acquireIncrement: 1
+    idleConnectionTestPeriod: 300
+    testConnectionOnCheckin: false
+    preferredTestQuery: SELECT 1
+    
+  mail:
+    host: smtp.office365.com
+    port: 587
+    username: info.ast@sbmtechnology.com.br
+    password: Sbm@2022
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+        auth: true
+        starttls.enable: true
+
+  servlet:
+    multipart.max-file-size: 15MB
+    max-request-size: 15MB    
+springdoc:
+  swagger-ui:
+    path: /docs
+    display-request-duration: true
+    disable-swagger-default-url: true
+    disable-execution: true
+    supported-submit-methods: ["get", "post", "put", "patch", "delete"]
+    security:
+     - bearerAuth: []
+jwt:
+  secret: TG1hY2hhZG9RdWludGFEb3JTQk0=
+  expiration: 604800
+jasperserver:
+  host: http://localhost:8080/jasperserver
+files:
+    #upload-folder: /opt/carbon/files/   
+    #base-url: https://carbon-apontamento.sbmtech.com.br:8443
+    upload-folder: C:\ApontamentosArquivos\
+    base-url: http://localhost:8443
+    virtual-path: /file/
